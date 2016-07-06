@@ -10,6 +10,10 @@ app.config(function($routeProvider){
 			templateUrl : "views/realisaties.html",
 			controller : "realisatieController"
 		})
+        .when("/recensies", {
+            templateUrl:"views/recensies.html",
+            controller : "recensieController"
+        })
 		.when("/contact", {
 			templateUrl : "views/contact.html",
 			controller : "contactController"
@@ -54,9 +58,26 @@ app.controller("realisatieController", function($scope){
     $scope.showPhoto = function (index) {
         $scope._Index = index;
     };
-    
+
 });
 
 app.controller("contactController", function($scope){
 	$scope.title = "Contact";
+});
+
+app.controller("recensieController", function($scope){
+    $scope.title ="Recensies";
+
+    this.recensie = {
+        naam: "",
+        recensie: ""
+    };
+
+    var data = new Firebase("database/data");
+
+    this.upload = function(){
+        console.log("user clicked upload", this.recensie);
+        var newDataPush = data.push(this.recensie);
+    };
+    
 });
