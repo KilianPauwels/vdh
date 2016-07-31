@@ -66,18 +66,19 @@ app.controller("contactController", function($scope){
 });
 
 app.controller("recensieController", function($scope){
-    $scope.title ="Recensies";
+    $scope.title = "Recensies";
 
-    this.recensie = {
-        naam: "",
-        recensie: ""
-    };
+    $scope.naam="";
+    $scope.recensie="";
 
-    var data = new Firebase("database/data");
+    
 
     this.upload = function(){
         console.log("user clicked upload", this.recensie);
-        var newDataPush = data.push(this.recensie);
+        firebase.database().ref('recensies/' + recensieId).push({
+            naam: this.naam,
+            recensie: this.recensie
+        });
     };
-    
+
 });
